@@ -12,12 +12,17 @@ const Navbar: React.FC = () => {
     }
   };
 
+  const scrollToTop = () => {
+    setIsOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <nav className="bg-black fixed w-full top-0 z-50">
       {/* Mobile Menu */}
       <div className="md:hidden relative">
         <div className="flex justify-between items-center p-4">
-          <Link to="/" className="text-xl font-bold text-primary-yellow">
+          <Link to="/" className="text-xl font-bold text-primary-yellow" onClick={scrollToTop}>
             CarRental
           </Link>
           
@@ -40,6 +45,13 @@ const Navbar: React.FC = () => {
         {/* Mobile Menu Items */}
         {isOpen && (
           <div className="absolute top-full left-0 right-0 bg-black py-4 px-6 flex flex-col space-y-4 border-t border-gray-800">
+            <Link 
+              to="/" 
+              className="text-white hover:text-primary-yellow text-center"
+              onClick={scrollToTop}
+            >
+              Accueil
+            </Link>
             <button
               onClick={() => scrollToSection('services')}
               className="text-white hover:text-primary-yellow text-center"
@@ -65,11 +77,18 @@ const Navbar: React.FC = () => {
 
       {/* Desktop Menu */}
       <div className="hidden md:flex justify-between items-center px-8 py-4">
-        <Link to="/" className="text-2xl font-bold text-primary-yellow">
+        <Link to="/" className="text-2xl font-bold text-primary-yellow" onClick={scrollToTop}>
           CarRental
         </Link>
         
         <div className="flex items-center space-x-8">
+          <Link 
+            to="/"
+            className="text-white hover:text-primary-yellow transition-colors"
+            onClick={scrollToTop}
+          >
+            Accueil
+          </Link>
           <button
             onClick={() => scrollToSection('services')}
             className="text-white hover:text-primary-yellow transition-colors"

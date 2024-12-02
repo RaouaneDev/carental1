@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Admin from './pages/Admin';
 import LoginPage from './pages/auth/LoginPage';
 import SignupPage from './pages/auth/SignupPage';
+import Vehicles from './pages/Vehicles';
 import Navbar from './components/Navbar';
 import AuthModal from './components/auth/AuthModal';
+import Footer from './components/Footer';
 
 interface CarDetails {
   name: string;
@@ -266,7 +268,7 @@ const MainPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-primary-black">
+    <div className="min-h-screen bg-primary-black flex flex-col">
       <Navbar />
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 bg-black bg-opacity-90 text-white z-40">
@@ -324,12 +326,9 @@ const MainPage: React.FC = () => {
               >
                 Accueil
               </button>
-              <button 
-                onClick={() => scrollToSection('vehicules')}
-                className="hover:text-primary-yellow transition-colors"
-              >
+              <Link to="/vehicles" className="hover:text-primary-yellow transition-colors">
                 Véhicules
-              </button>
+              </Link>
               <button 
                 onClick={() => scrollToSection('services')}
                 className="hover:text-primary-yellow transition-colors"
@@ -371,12 +370,9 @@ const MainPage: React.FC = () => {
                 >
                   Accueil
                 </button>
-                <button 
-                  onClick={() => scrollToSection('vehicules')}
-                  className="hover:text-primary-yellow transition-colors"
-                >
+                <Link to="/vehicles" className="hover:text-primary-yellow transition-colors">
                   Véhicules
-                </button>
+                </Link>
                 <button 
                   onClick={() => scrollToSection('services')}
                   className="hover:text-primary-yellow transition-colors"
@@ -422,9 +418,9 @@ const MainPage: React.FC = () => {
             <p className="text-gray-300 text-xl mb-8">
               Découvrez notre sélection de véhicules haut de gamme
             </p>
-            <button onClick={() => document.getElementById('vehicles-section')?.scrollIntoView({ behavior: 'smooth' })} className="bg-primary-yellow text-black px-8 py-3 rounded-full font-bold hover:bg-yellow-600 transition-colors">
+            <Link to="/vehicles" className="bg-primary-yellow text-black px-8 py-3 rounded-full font-bold hover:bg-yellow-600 transition-colors">
               Tous nos véhicules
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -1047,23 +1043,7 @@ const MainPage: React.FC = () => {
       )}
 
       {/* Footer */}
-      <footer className="bg-black text-gray-400 py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <p>&copy; 2024 CarRental. Tous droits réservés.</p>
-            </div>
-            <div className="flex space-x-4">
-              <a 
-                href="/admin"
-                className="text-gray-500 hover:text-primary-yellow transition-colors text-sm"
-              >
-                Administration
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
@@ -1071,14 +1051,17 @@ const MainPage: React.FC = () => {
 const App: React.FC = () => {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-900">
+      <div className="min-h-screen bg-gray-900 flex flex-col">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/admin" element={<Admin />} />
-        </Routes>
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Vehicles />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/admin" element={<Admin />} />
+          </Routes>
+        </main>
+        <Footer />
       </div>
     </Router>
   );

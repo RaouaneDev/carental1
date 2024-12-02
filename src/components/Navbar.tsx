@@ -4,6 +4,14 @@ import { Link } from 'react-router-dom';
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const scrollToSection = (sectionId: string) => {
+    setIsOpen(false);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className="bg-black fixed w-full top-0 z-50">
       {/* Mobile Menu */}
@@ -32,36 +40,20 @@ const Navbar: React.FC = () => {
         {/* Mobile Menu Items */}
         {isOpen && (
           <div className="absolute top-full left-0 right-0 bg-black py-4 px-6 flex flex-col space-y-4 border-t border-gray-800">
-            <Link 
-              to="/" 
+            <button
+              onClick={() => scrollToSection('services')}
               className="text-white hover:text-primary-yellow text-center"
-              onClick={() => setIsOpen(false)}
-            >
-              Accueil
-            </Link>
-            <Link 
-              to="/vehicles" 
-              className="text-white hover:text-primary-yellow text-center"
-              onClick={() => setIsOpen(false)}
-            >
-              Véhicules
-            </Link>
-            <Link 
-              to="/services" 
-              className="text-white hover:text-primary-yellow text-center"
-              onClick={() => setIsOpen(false)}
             >
               Services
-            </Link>
-            <Link 
-              to="/contact" 
+            </button>
+            <button
+              onClick={() => scrollToSection('contact')}
               className="text-white hover:text-primary-yellow text-center"
-              onClick={() => setIsOpen(false)}
             >
               Contact
-            </Link>
-            <Link
-              to="/login"
+            </button>
+            <Link 
+              to="/login" 
               className="text-white hover:text-primary-yellow text-center"
               onClick={() => setIsOpen(false)}
             >
@@ -72,40 +64,27 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Desktop Menu */}
-      <div className="hidden md:block py-4 px-6">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold text-primary-yellow">
-            CarRental
+      <div className="hidden md:flex justify-between items-center px-8 py-4">
+        <Link to="/" className="text-2xl font-bold text-primary-yellow">
+          CarRental
+        </Link>
+        
+        <div className="flex items-center space-x-8">
+          <button
+            onClick={() => scrollToSection('services')}
+            className="text-white hover:text-primary-yellow transition-colors"
+          >
+            Services
+          </button>
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="text-white hover:text-primary-yellow transition-colors"
+          >
+            Contact
+          </button>
+          <Link to="/login" className="bg-primary-yellow text-black px-4 py-2 rounded-md font-semibold hover:bg-yellow-600 transition-colors">
+            Connexion
           </Link>
-
-          <div className="flex items-center space-x-8">
-            <Link to="/" className="text-white hover:text-primary-yellow">
-              Accueil
-            </Link>
-            <Link to="/vehicles" className="text-white hover:text-primary-yellow">
-              Véhicules
-            </Link>
-            <Link to="/services" className="text-white hover:text-primary-yellow">
-              Services
-            </Link>
-            <Link to="/contact" className="text-white hover:text-primary-yellow">
-              Contact
-            </Link>
-            <div className="flex items-center space-x-4">
-              <Link
-                to="/login"
-                className="text-white hover:text-primary-yellow px-4 py-2 rounded-md border border-primary-yellow hover:bg-primary-yellow hover:text-black transition-colors"
-              >
-                Se connecter
-              </Link>
-              <Link
-                to="/signup"
-                className="text-black bg-primary-yellow hover:bg-yellow-600 px-4 py-2 rounded-md transition-colors"
-              >
-                S'inscrire
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
     </nav>

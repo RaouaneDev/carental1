@@ -189,12 +189,11 @@ const SignupPage: React.FC = () => {
                 required
                 className="h-4 w-4 text-primary-yellow focus:ring-primary-yellow border-gray-600 rounded bg-gray-700"
               />
-              <label htmlFor="terms" className="ml-2 block text-sm text-gray-300">
-                J'accepte les{' '}
-                <a href="#" className="text-primary-yellow hover:text-yellow-600">
-                  conditions d'utilisation
-                </a>
-              </label>
+              <div className="text-sm">
+                <Link to="/terms" className="font-medium text-primary-yellow hover:text-yellow-600">
+                  Conditions d'utilisation
+                </Link>
+              </div>
             </div>
 
             <div>

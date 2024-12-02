@@ -67,7 +67,7 @@ const Navbar: React.FC = () => {
             <Link 
               to="/login" 
               className="text-white hover:text-primary-yellow text-center"
-              onClick={() => setIsOpen(false)}
+              onClick={scrollToTop}
             >
               Connexion
             </Link>
@@ -101,7 +101,11 @@ const Navbar: React.FC = () => {
           >
             Contact
           </button>
-          <Link to="/login" className="bg-primary-yellow text-black px-4 py-2 rounded-md font-semibold hover:bg-yellow-600 transition-colors">
+          <Link 
+            to="/login" 
+            className="bg-primary-yellow text-black px-4 py-2 rounded-md font-semibold hover:bg-yellow-600 transition-colors"
+            onClick={scrollToTop}
+          >
             Connexion
           </Link>
         </div>
